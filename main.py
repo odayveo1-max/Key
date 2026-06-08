@@ -49,8 +49,8 @@ def sign(payload: str) -> str:
     return hmac.new(SERVER_SECRET, payload.encode(), hashlib.sha256).hexdigest()
 
 def build_sig(reason: str, key: str, hwid: str, expires: str, valid: bool) -> str:
-    # Primary guess:  reason|key|hwid|expires
-    payload = f"{reason}|{key}|{hwid}|{expires}"
+    # استخدام الخيار A
+    payload = f"{key}:{hwid}:{reason}:{expires}"
     return sign(payload)
 
 # ----- Request schema -----
