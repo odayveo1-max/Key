@@ -7,7 +7,7 @@ class KeyRequest(BaseModel):
     key: str
     hwid: str
 
-@app.post("/validate")
+@app.post("/")
 def validate_key(data: KeyRequest):
     return {
         "reason": "success",
