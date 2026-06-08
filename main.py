@@ -50,7 +50,7 @@ def sign(payload: str) -> str:
 
 def build_sig(reason: str, key: str, hwid: str, expires: str, valid: bool) -> str:
     # استخدام الخيار C
-    payload = f"{reason}{valid}{key}{hwid}{expires}"
+    payload = f"{reason}{sig}{valid}{key}{hwid}"
     return sign(payload)
 
 # ----- Request schema -----
