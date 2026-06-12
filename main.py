@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-# قاعدة البيانات المصغرة للمفاتيح الصالحة
 LICENSES_DATABASE = {
     "GP4S-Q0TY-YQ3U-HKIH": {
         "expires": "2026-09-14T04:56:51.375062",
@@ -16,12 +15,12 @@ class KeyRequest(BaseModel):
     key: str
     hwid: str
 
-# استقبال الطلبات من المود على المسار الرئيسي مباشرة
-@app.post("/")
+# تعديل المسار هنا ليصبح /validate بدقة
+@app.post("/validate")
 def validate_key(data: KeyRequest):
     if data.key in LICENSES_DATABASE:
         return LICENSES_DATABASE[data.key]
-
+    
     return {
         "reason": "invalid_key",
         "sig": "0000000000000000000000000000000000000000000000000000000000000000",
