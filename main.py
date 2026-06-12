@@ -6,7 +6,7 @@ app = FastAPI()
 # قاعدة البيانات المصغرة للمفاتيح الصالحة
 LICENSES_DATABASE = {
     "GP4S-Q0TY-YQ3U-HKIH": {
-        "expires": "2032-09-14T04:56:51.375062",
+        "expires": "2026-09-14T04:56:51.375062",
         "sig": "713687fc116c2f9c40e2be5eb939c7b3f70131ebe345eac72e2a167013395d63",
         "valid": True
     }
