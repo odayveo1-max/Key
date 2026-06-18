@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22.1)
 project("jawaker_cheto")
 
 # تحويل الكود المصدري إلى مكتبة مشتركة (.so)
-add_library(system SHARED native-lib.cpp)
+add_library(system SHARED src/main/cpp/native-lib.cpp)
 
 # جلب مكتبات النظام الأساسية من Android NDK لمنع الكراش
 find_library(log-lib log)
