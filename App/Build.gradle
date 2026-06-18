@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    namespace 'com.jawaker.cheto'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 33
+
+        externalNativeBuild {
+            cmake {
+                // تفعيل دعم C++17 وتقليل حجم الملف النهائي
+                cppFlags "-std=c++17 -fPIC -fvisibility=hidden -Os"
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+            version "3.22.1"
+        }
+    }
+    
+    // إصدار NDK قياسي ومستقر
+    ndkVersion "25.2.9519653" 
+}
