@@ -3,7 +3,7 @@ name: Build Android Native Library
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # هذا السطر يسمح لك بتشغيل البناء يدوياً
+  workflow_dispatch:
 
 jobs:
   build:
@@ -22,15 +22,21 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
 
-    - name: Prepare Gradle and Build
+    - name: Force Fix Environment & Build
       run: |
-        gradle wrapper
-        chmod +x gradlew
-        ./gradlew :app:assembleRelease
+        # 1. توحيد اسم المجلد إجبارياً ليكون app وتجنب مشكلة الأحرف
+        mv App app 2>/dev/null || true
+        
+        # 2. إنشاء ملف settings.gradle الصحيح إجبارياً لتجنب أي تعارض
+        echo "rootProject.name = 'JawakerCheto'" > settings.gradle
+        echo "include ':app'" >> settings.gradle
+        
+        # 3. البناء المباشر بدون الاعتماد على مسار محدد
+        gradle assembleRelease
 
     - name: Upload libsystem.so
       uses: actions/upload-artifact@v4
       with:
         name: Jawaker-Cheto-Lib
-        # هذا المسار يبحث عن أي ملف .so تم إنشاؤه ويرفعه لك
-        path: app/build/intermediates/**/libsystem.so
+        # هذا السطر السحري سيبحث عن المكتبة في أي مجلد فرعي ويرفعها لك
+        path: '**/libsystem.so'
